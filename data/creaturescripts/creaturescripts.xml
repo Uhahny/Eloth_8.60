@@ -10,6 +10,7 @@
 	<event type="think" name="FirewalkerBoots" script="firewalker_boots.lua"/>
 	<event type="login" name="LevelProtection" script="custom/level_protection.lua" />
 	<event type="kill" name="TaskKill" script="task_kill.lua"/>
+	<event type="modalwindow" name="TaskModal" script="task_modal.lua"/>
 
 	<event type="death" name="inquisitionPortals" script="inquisitionPortals.lua"/>
 	<event type="death" name="bluelegs" script="bluelegs.lua"/>
