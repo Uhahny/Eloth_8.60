@@ -1,0 +1,6 @@
+/home/tfs/build/CMakeFiles/tfs.dir
+/home/tfs/build/CMakeFiles/check_git.dir
+/home/tfs/build/CMakeFiles/edit_cache.dir
+/home/tfs/build/CMakeFiles/rebuild_cache.dir
+/home/tfs/build/src/CMakeFiles/edit_cache.dir
+/home/tfs/build/src/CMakeFiles/rebuild_cache.dir
