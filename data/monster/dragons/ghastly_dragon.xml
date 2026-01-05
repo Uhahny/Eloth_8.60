@@ -20,7 +20,7 @@
 	</flags>
 	<attacks>
 		<attack name="melee" interval="2000" min="0" max="-603"/>
-		<attack name="ghastly dragon curse" interval="2000" chance="5" range="5"/>
+		<!-- Removed invalid custom attack -->
 		<attack name="poisoncondition" interval="2000" chance="10" target="1" range="5" min="-920" max="-1280">
 			<attribute key="areaEffect" value="bats"/>
 			<attribute key="areaEffect" value="smallclouds"/>

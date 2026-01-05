@@ -23,7 +23,7 @@
 			<attribute key="shootEffect" value="fire"/>
 			<attribute key="areaEffect" value="fireattack"/>
 		</attack>
-		<attack name="hellspawn soulfire" interval="2000" range="5" chance="10"/>
+		<!-- Removed invalid custom attack -->
 	</attacks>
 	<defenses armor="40" defense="40">
 		<defense name="healing" interval="2000" chance="10" min="120" max="230">

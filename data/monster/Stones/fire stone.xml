@@ -43,13 +43,9 @@
 		<summon name="Hellhound" interval="10000" chance="10" max="4"/>
 	</summons>
 
-    <loot>
-	<item id="9693" chance1="3000" chancemax="0"/>
-	<item id="2157" chance1="4000" chancemax="0"/>
-	<item id="10503" chance1="100000" chancemax="0"/>
-    <item id="6527" chance1="100000" countmax="25" chancemax="0"/>
-  </loot>
-<script>
-<event name="critical"/>
-</script>
+	<loot>
+		<item id="2157" chance="4000"/>
+		<item id="10503" chance="100000"/>
+		<item id="6527" chance="100000" countmax="25"/>
+	</loot>
 </monster>

@@ -26,7 +26,7 @@
 			<attribute key="shootEffect" value="fire" />
 			<attribute key="areaEffect" value="fireattack" />
 		</attack>
-		<attack name="diabolic imp skill reducer" interval="2000" chance="10" range="7"/>
+		<!-- Removed invalid custom attack -->
 	</attacks>
 	<defenses armor="15" defense="15">
 		<defense name="healing" interval="2000" chance="35" min="275" max="840">
@@ -60,7 +60,7 @@
 	</voices>
 	<loot>
 		<item id="6500" chance="100000"/><!-- demonic essence -->
-		<item id="2148" countmax="150" chance="100000"/><!-- gold coin -->
+		<item id="2148" countmax="100" chance="100000"/><!-- gold coin -->
 		<item id="6534" chance="100000"/><!-- the Imperor's trident -->
 		<item id="2548" chance="53850"/><!-- pitchfork -->
 		<item id="2432" chance="11000"/><!-- fire axe -->

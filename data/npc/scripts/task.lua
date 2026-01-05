@@ -79,7 +79,7 @@ local function startTask(player, task)
     player:setStorageValue(STORAGE_ACTIVE_TASK, task.id)
     player:setStorageValue(STORAGE_KILLCOUNT, 0)
     log('Player %s started task %s (#%d)', player:getName(), task.name, task.id)
-    npcHandler:say(string.format("Task started: %s. Kill %d %s.", task.name, task.count, task.monster), player)
+    npcHandler:say(string.format("Task started: %s. Kill %d %s.", task.name, task.count, task.monster), player:getId())
     return true
 end
 
@@ -87,7 +87,7 @@ local function reportTask(player)
     local active = player:getStorageValue(STORAGE_ACTIVE_TASK)
     local task = TASKS[active]
     if not task then
-        npcHandler:say("You have no active task.", player)
+        npcHandler:say("You have no active task.", player:getId())
         player:setStorageValue(STORAGE_ACTIVE_TASK, -1)
         player:setStorageValue(STORAGE_KILLCOUNT, -1)
         return
@@ -96,25 +96,25 @@ local function reportTask(player)
     if kills >= task.count then
         giveRewards(player, task.rewards)
         log('Player %s completed task %s (#%d)', player:getName(), task.name, task.id)
-        npcHandler:say(string.format("Completed %s. Rewards delivered!", task.name), player)
+        npcHandler:say(string.format("Completed %s. Rewards delivered!", task.name), player:getId())
         player:setStorageValue(STORAGE_ACTIVE_TASK, -1)
         player:setStorageValue(STORAGE_KILLCOUNT, -1)
     else
-        npcHandler:say(string.format("Progress: %d/%d %s.", kills, task.count, task.monster), player)
+        npcHandler:say(string.format("Progress: %d/%d %s.", kills, task.count, task.monster), player:getId())
     end
 end
 
 local function cancelTask(player)
     local active = player:getStorageValue(STORAGE_ACTIVE_TASK)
     if active <= 0 then
-        npcHandler:say("You have no active task.", player)
+        npcHandler:say("You have no active task.", player:getId())
         return
     end
     local task = TASKS[active]
     log('Player %s cancelled task %s (#%d)', player:getName(), task and task.name or 'unknown', active)
     player:setStorageValue(STORAGE_ACTIVE_TASK, -1)
     player:setStorageValue(STORAGE_KILLCOUNT, -1)
-    npcHandler:say(string.format("Task %s cancelled.", task and task.name or ''), player)
+    npcHandler:say(string.format("Task %s cancelled.", task and task.name or ''), player:getId())
 end
 
 function creatureSayCallback(cid, type, msg)

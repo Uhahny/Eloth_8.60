@@ -22,8 +22,7 @@
 			<attribute key="shootEffect" value="energy"/>
 		</attack>
 		<attack name="outfit" interval="2000" chance="1" range="7" monster="skeleton" duration="3000"/>
-		<attack name="war golem electrify" range="1" interval="2000" chance="15"/>
-		<attack name="war golem skill reducer" interval="2000" chance="10"/>
+		<!-- Removed invalid custom attacks -->
 	</attacks>
 	<defenses armor="40" defense="40">
 		<defense name="speed" interval="2000" chance="15" speedchange="300" duration="5000">
@@ -60,7 +59,7 @@
 	</voices>
 	<loot>
 		<item id="2148" countmax="90" chance="37500"/><!-- gold coin -->
-		<item id="2148" countmax="80" chance="375000"/><!-- gold coin -->
+		<item id="2148" countmax="80" chance="100000"/><!-- gold coin -->
 		<item id="8309" countmax="5" chance="5260"/><!-- nails -->
 		<item id="2377" chance="5500"/><!-- two handed sword -->
 		<item id="2510" chance="9000"/><!-- plate shield -->

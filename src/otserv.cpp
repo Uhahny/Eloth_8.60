@@ -335,7 +335,8 @@ void mainLoader(int, char*[], ServiceManager* services)
 
 bool argumentsHandler(const StringVector& args)
 {
-	for (const auto& arg : args) {
+	for (size_t i = 0; i < args.size(); ++i) {
+		const auto& arg = args[i];
 		if (arg == "--help") {
 			std::clog << "Usage:\n"
 			"\n"
@@ -350,16 +351,42 @@ bool argumentsHandler(const StringVector& args)
 			return false;
 		}
 
-		StringVector tmp = explodeString(arg, "=");
+		// Obsługuj zarówno --flag=value jak i "--flag value".
+		std::string key = arg;
+		std::string value;
+		const auto eqPos = arg.find('=');
+		if (eqPos != std::string::npos) {
+			key = arg.substr(0, eqPos);
+			value = arg.substr(eqPos + 1);
+		} else if ((i + 1) < args.size() && args[i + 1].rfind("--", 0) != 0) {
+			value = args[++i];
+		}
 
-		if (tmp[0] == "--config")
-			g_config.setString(ConfigManager::CONFIG_FILE, tmp[1]);
-		else if (tmp[0] == "--ip")
-			g_config.setString(ConfigManager::IP_STRING, tmp[1]);
-		else if (tmp[0] == "--login-port")
-			g_config.setNumber(ConfigManager::LOGIN_PORT, std::stoi(tmp[1]));
-		else if (tmp[0] == "--game-port")
-			g_config.setNumber(ConfigManager::GAME_PORT, std::stoi(tmp[1]));
+		if (key == "--config") {
+			if (value.empty()) {
+				std::clog << "Missing value for --config" << std::endl;
+				return false;
+			}
+			g_config.setString(ConfigManager::CONFIG_FILE, value);
+		} else if (key == "--ip") {
+			if (value.empty()) {
+				std::clog << "Missing value for --ip" << std::endl;
+				return false;
+			}
+			g_config.setString(ConfigManager::IP_STRING, value);
+		} else if (key == "--login-port") {
+			if (value.empty()) {
+				std::clog << "Missing value for --login-port" << std::endl;
+				return false;
+			}
+			g_config.setNumber(ConfigManager::LOGIN_PORT, std::stoi(value));
+		} else if (key == "--game-port") {
+			if (value.empty()) {
+				std::clog << "Missing value for --game-port" << std::endl;
+				return false;
+			}
+			g_config.setNumber(ConfigManager::GAME_PORT, std::stoi(value));
+		}
 	}
 
 	return true;

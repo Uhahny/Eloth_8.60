@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<npc name="A Ghostly Sage" script="default.lua" walkinterval="0" floorchange="0">
+	<health now="100" max="100"/>
+	<look type="165" head="0" body="0" legs="0" feet="0"/> <!-- ghostly appearance -->
+	<parameters>
+		<parameter key="message_greet" value="Greetings, traveler."/>
+		<parameter key="message_farewell" value="Farewell."/>
+	</parameters>
+</npc>

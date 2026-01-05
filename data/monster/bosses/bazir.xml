@@ -41,12 +41,6 @@
 		<attack name="strength" interval="1000" chance="8" radius="5" target="0">
 			<attribute key="areaEffect" value="blackspark" />
 		</attack>
-		<attack name="outfit" interval="1000" chance="2" radius="8" target="0" monster="demon" duration="5000">
-			<attribute key="areaEffect" value="bluebubble" />
-		</attack>
-		<attack name="outfit" interval="1000" chance="2" radius="8" target="0" item="3058" duration="5000">
-			<attribute key="areaEffect" value="bluebubble" />
-		</attack>
 		<attack name="fire" interval="1000" chance="34" range="7" radius="7" target="1" min="-100" max="-900">
 			<attribute key="shootEffect" value="fire" />
 			<attribute key="areaEffect" value="firearea" />

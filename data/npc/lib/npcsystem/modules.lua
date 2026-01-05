@@ -593,6 +593,11 @@ if Modules == nil then
 				i = i + 1
 			end
 
+			if not itemid then
+				print("[Warning : " .. Npc():getName() .. "] NpcSystem:", "Item id missing (or invalid) for parameter item:", item)
+				goto continue_buyable
+			end
+
 			local it = ItemType(itemid)
 			if it:getId() == 0 then
 				-- invalid item
@@ -636,6 +641,7 @@ if Modules == nil then
 					print("[Warning : " .. Npc():getName() .. "] NpcSystem:", "Parameter(s) missing for item:", name, itemid, cost)
 				end
 			end
+		::continue_buyable::
 		end
 	end
 
@@ -666,6 +672,11 @@ if Modules == nil then
 					print("[Warning : " .. Npc():getName() .. "] NpcSystem:", "Unknown parameter found in sellable items parameter.", temp, item)
 				end
 				i = i + 1
+			end
+
+			if not itemid then
+				print("[Warning : " .. Npc():getName() .. "] NpcSystem:", "Item id missing (or invalid) for parameter item:", item)
+				goto continue_sellable
 			end
 
 			local it = ItemType(itemid)
@@ -699,6 +710,7 @@ if Modules == nil then
 					print("[Warning : " .. Npc():getName() .. "] NpcSystem:", "Parameter(s) missing for item:", name, itemid, cost)
 				end
 			end
+		::continue_sellable::
 		end
 	end
 
