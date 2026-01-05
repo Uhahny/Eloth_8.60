@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<globalevents>
+
+	<globalevent name="save" interval="900000" event="script" value="save.lua"/>
+	<globalevent name="effecttile" interval="3000" script="effectile.lua"/>  	
+	<globalevent name="shop" interval="8000" script="shop.lua"/>
+	<globalevent name="powergamers" interval="60000" script="powergamers.lua"/>
+	<globalevent name="OnlinePoints" interval="3600000" script="online_points.lua" />
+	<globalevent name="animate" interval="2000" script="animate.lua" />
+	<globalevent name="EffectTemple" interval="1300" script="effectTemple.lua" /> 
+
+</globalevents>
