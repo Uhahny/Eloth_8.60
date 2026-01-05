@@ -1,1 +1,7 @@
 data/world/*.otbm
+build/
+tfs
+*.o
+*.o.d
+*.log
+*.pid

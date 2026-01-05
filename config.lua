@@ -18,10 +18,9 @@ expFromPlayersLevelRange = 75
 pzLockSkullAttacker = false
 
 -- proxy
-ip = "127.0.0.1" -- important, do not change
+ip = "89.42.88.123" -- external IP sent to clients
 proxyPort = 7172
-statusIP = "91.99.157.67" -- set this to your closest forward proxy server IP
-bindOnlyGlobalAddress = true -- important, do not change
+statusIP = "89.42.88.123"
 bindOnlyGlobalAddress = false
 loginProtocolPort = 7171
 gameProtocolPort = 7172
