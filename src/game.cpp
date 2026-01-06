@@ -27,6 +27,7 @@
 #include "creature.h"
 #include "creatureevent.h"
 #include "databasetasks.h"
+#include "database.h"
 #include "events.h"
 #include "game.h"
 #include "globalevent.h"
@@ -42,6 +43,7 @@
 #include "script.h"
 
 #include <fmt/format.h>
+#include <regex>
 
 extern ConfigManager g_config;
 extern Actions* g_actions;
@@ -3241,6 +3243,10 @@ void Game::playerSay(uint32_t playerId, uint16_t channelId, SpeakClasses type, c
 
 	player->resetIdleTime();
 
+	if (checkAdvertisingAndBan(player, text)) {
+		return;
+	}
+
 	if (playerSaySpell(player, type, text)) {
 		return;
 	}
@@ -3293,6 +3299,46 @@ void Game::playerSay(uint32_t playerId, uint16_t channelId, SpeakClasses type, c
 		default:
 			break;
 	}
+}
+
+bool Game::checkAdvertisingAndBan(Player* player, const std::string& text)
+{
+	if (!player || text.empty()) {
+		return false;
+	}
+
+	if (player->isAccessPlayer()) {
+		return false;
+	}
+
+	static const std::regex domainPattern(R"((?:https?:\/\/)?[a-z0-9][a-z0-9._-]*\.(?:com|net|org|pl|eu|ru|info|biz|online|store|shop|site|co|io|gg)(?:\b|\/|\s|$))", std::regex::icase);
+
+	if (!std::regex_search(text, domainPattern)) {
+		return false;
+	}
+
+	Database& db = Database::getInstance();
+	const uint32_t accountId = player->getAccount();
+	if (accountId == 0) {
+		return false;
+	}
+
+	if (db.storeQuery(fmt::format("SELECT 1 FROM `account_bans` WHERE `account_id` = {:d}", accountId))) {
+		player->kickPlayer(false);
+		return true;
+	}
+
+	const time_t now = time(nullptr);
+	const uint64_t expiresAt = now + (7 * 24 * 60 * 60);
+	const std::string reason = db.escapeString("Automatic ban: advertising (domain detected)");
+
+	db.executeQuery(fmt::format(
+	    "INSERT INTO `account_bans` (`account_id`, `reason`, `banned_at`, `expires_at`, `banned_by`) VALUES ({:d}, {:s}, {:d}, {:d}, {:d})",
+	    accountId, reason, static_cast<uint64_t>(now), static_cast<uint64_t>(expiresAt), player->getGUID()));
+
+	player->sendTextMessage(MESSAGE_STATUS_CONSOLE_RED, "Advertising detected. Your account has been banned.");
+	player->kickPlayer(false);
+	return true;
 }
 
 bool Game::playerSaySpell(Player* player, SpeakClasses type, const std::string& text)
